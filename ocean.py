@@ -12,35 +12,15 @@ import streamlit as st
 import pandas as pd
 
 # Sample dataframe with column options
-df = pd.DataFrame({
-    'Job Close Date': [],
-    'Consolidation Type': [],
-    'POL': [],
-    'ATD': [],
-    'ATA': [],
-    'POD': [],
-    'Weight(Tons)': []
-})
-
-# Define columns that need to be mapped
-columns_to_map = {
-    'Res_Date': 'Select column for Res_Date',
-    'Facility': 'Select column for Facility',
-    'Departure': 'Select column for Departure',
-    'Start Date': 'Select column for Start Date',
-    'End Date': 'Select column for End Date',
-    'Arrival': 'Select column for Arrival',
-    'Weight Ton': 'Select column for Weight Ton'
-}
-
-# User inputs for column mapping
-column_mapping = {}
-for key, label in columns_to_map.items():
-    column_mapping[key] = st.selectbox(label, df.columns)
-
-# Show the final column mapping
-st.write("Final Column Mapping:")
-st.write(column_mapping)
+column_mapping = {
+        'Res_Date': 'Job Close Date',
+        'Facility': 'Consolidation Type',
+        'Departure': 'POL',
+        'Start Date': 'ATD',
+        "End Date": "ATA",
+        "Arrival": "POD",
+        "Weight Ton": "Weight(Tons)"
+    }
 
 
     # Preserve the first row (header) of the template
