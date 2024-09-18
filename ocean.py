@@ -52,16 +52,16 @@ if client_file is not None:
     # Load the client file to preview columns for mapping
     df = pd.read_excel(client_file)
     
-    st.write("Select columns for mapping:")
+    st.write("Select columns for mapping (searchable):")
     selected_columns = {}
     
-    selected_columns['Res_Date'] = st.selectbox('Select column for Res_Date', df.columns)
-    selected_columns['Facility'] = st.selectbox('Select column for Facility', df.columns)
-    selected_columns['Departure'] = st.selectbox('Select column for Departure', df.columns)
-    selected_columns['Start Date'] = st.selectbox('Select column for Start Date', df.columns)
-    selected_columns['End Date'] = st.selectbox('Select column for End Date', df.columns)
-    selected_columns['Arrival'] = st.selectbox('Select column for Arrival', df.columns)
-    selected_columns['Weight Ton'] = st.selectbox('Select column for Weight Ton', df.columns)
+    selected_columns['Res_Date'] = st.selectbox('Select column for Res_Date', df.columns, key='res_date')
+    selected_columns['Facility'] = st.selectbox('Select column for Facility', df.columns, key='facility')
+    selected_columns['Departure'] = st.selectbox('Select column for Departure', df.columns, key='departure')
+    selected_columns['Start Date'] = st.selectbox('Select column for Start Date', df.columns, key='start_date')
+    selected_columns['End Date'] = st.selectbox('Select column for End Date', df.columns, key='end_date')
+    selected_columns['Arrival'] = st.selectbox('Select column for Arrival', df.columns, key='arrival')
+    selected_columns['Weight Ton'] = st.selectbox('Select column for Weight Ton', df.columns, key='weight_ton')
 
     # Process files and map columns
     processed_data = process_files(client_file, template_file, selected_columns)
