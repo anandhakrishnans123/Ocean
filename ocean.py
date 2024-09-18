@@ -8,11 +8,7 @@ def process_files(client_file, template_file):
     template_df = pd.read_excel(template_file)
 
     # Column mapping from df to the template_df
-import streamlit as st
-import pandas as pd
-
-# Sample dataframe with column options
-column_mapping = {
+    column_mapping = {
         'Res_Date': 'Job Close Date',
         'Facility': 'Consolidation Type',
         'Departure': 'POL',
@@ -21,7 +17,6 @@ column_mapping = {
         "Arrival": "POD",
         "Weight Ton": "Weight(Tons)"
     }
-
 
     # Preserve the first row (header) of the template
     preserved_header = template_df.iloc[:0, :]
