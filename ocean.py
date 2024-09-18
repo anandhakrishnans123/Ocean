@@ -3,20 +3,9 @@ import pandas as pd
 from io import BytesIO
 
 # Function to process the Excel files and map columns
-def process_files(client_file, template_file):
+def process_files(client_file, template_file, column_mapping):
     df = pd.read_excel(client_file)
     template_df = pd.read_excel(template_file)
-
-    # Column mapping from df to the template_df
-    column_mapping = {
-        'Res_Date': 'Job Close Date',
-        'Facility': 'Consolidation Type',
-        'Departure': 'POL',
-        'Start Date': 'ATD',
-        "End Date": "ATA",
-        "Arrival": "POD",
-        "Weight Ton": "Weight(Tons)"
-    }
 
     # Preserve the first row (header) of the template
     preserved_header = template_df.iloc[:0, :]
@@ -60,8 +49,22 @@ client_file = st.file_uploader("Upload Client Workbook", type="xls")
 template_file = 'Freight-Sample_scope3.xlsx'  # Directly loading template from file system
 
 if client_file is not None:
+    # Load the client file to preview columns for mapping
+    df = pd.read_excel(client_file)
+    
+    st.write("Select columns for mapping:")
+    selected_columns = {}
+    
+    selected_columns['Res_Date'] = st.selectbox('Select column for Res_Date', df.columns)
+    selected_columns['Facility'] = st.selectbox('Select column for Facility', df.columns)
+    selected_columns['Departure'] = st.selectbox('Select column for Departure', df.columns)
+    selected_columns['Start Date'] = st.selectbox('Select column for Start Date', df.columns)
+    selected_columns['End Date'] = st.selectbox('Select column for End Date', df.columns)
+    selected_columns['Arrival'] = st.selectbox('Select column for Arrival', df.columns)
+    selected_columns['Weight Ton'] = st.selectbox('Select column for Weight Ton', df.columns)
+
     # Process files and map columns
-    processed_data = process_files(client_file, template_file)
+    processed_data = process_files(client_file, template_file, selected_columns)
     
     # Show a sample of the processed data
     st.write("Processed Data Preview:")
